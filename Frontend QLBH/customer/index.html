@@ -10,41 +10,40 @@
 <body>
     <div id="header-box">
         <h2>ABC WEB</h2>
-        <div id="header-detail">
-            <div class="header-row">
+        <div onload="returnDriver()" id="header-detail">
+            <!-- <div class="header-row">
                 <p>Mã Khách Hàng </p>
-                <!-- <label>test</label>  -->
-                
+            </div> 
+            -->
+
+            <!-- <div class="header-row">
+                <p>Tên Khách Hàng </p>
             </div>
 
             <div class="header-row">
-                <p>Tên Khách Hàng </p>
-                <!-- <label>test</label>  -->
-                
-            </div>
-            <div class="header-row">
                 <p>Số điện thoại </p>
-                <!-- <label>test</label>   -->
-            
             </div>
+            
             <div class="header-row">
                 <p>Số Đơn Hàng Chưa Được Giao </p>
-                <!-- <label>test</label>  -->   
-            </div>
+            </div> -->
         </div>
     </div>
     <div id="list-nextPage">
         <form>
             <div class = "nextPage">
                 <!-- href="../DH_Cho/index.html" -->
-                <a onclick = "location.href = '../customer/DanhSachMonAn.html'" >Tìm Kiếm Theo Món Ăn</a>
+                <a onclick = "location.href = '../customer/DanhSachMonAn.html'" >Tìm Kiếm Theo Cửa Hàng</a>
             </div>
             <div class = "nextPage">
-                <a  onclick = "location.href = '../customer/DanhSachCuaHang.html'">Tìm Kiếm Theo Cửa Hàng</a>
+                <a  onclick = "location.href = '../customer/DanhSachCuaHang.html'">Tìm Kiếm Theo Món Ăn</a>
             </div>
             <div class = "nextPage">
                 <a  onclick = "location.href = '../customer/TheoDoiDonHang.html'">Theo Dõi Đơn Hàng</a>
             </div>
+            <!-- <div class = "nextPage">
+                <a onclick = "checkStatus2('../kichhoat/index.html')" >Thông tin cá nhân</a>
+            </div> -->
             <div class = "nextPage">
                 <a onclick = "logout_forcustomer()">Đăng xuất</a>
             </div>
