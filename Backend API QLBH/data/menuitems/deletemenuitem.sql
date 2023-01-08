@@ -1,0 +1,1 @@
+EXEC [dbo].[deleteMonAnDoiTac] @tenmon

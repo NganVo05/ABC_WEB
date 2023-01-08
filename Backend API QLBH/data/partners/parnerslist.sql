@@ -1,0 +1,2 @@
+EXEC [dbo].[GetAllParners]
+

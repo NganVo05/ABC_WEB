@@ -1,0 +1,1 @@
+EXEC [dbo].[loginForPartner] @username, @password

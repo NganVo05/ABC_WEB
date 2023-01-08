@@ -1,0 +1,1 @@
+EXEC [dbo].[deleteFoodFromRestaurant] @tenmon, @macuahang, @masothue

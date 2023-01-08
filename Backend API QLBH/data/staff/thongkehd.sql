@@ -1,0 +1,1 @@
+exec [dbo].[ThongKeHD] @masothue, @ngaythangnam, @loai 

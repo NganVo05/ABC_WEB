@@ -1,0 +1,1 @@
+exec [dbo].[NV_duyetNV] @nvduyet, @nv

@@ -1,0 +1,1 @@
+EXEC [dbo].[createEMP] @manv, @cmnd, @hoten, @diachi, @stk, @email, @mk, @sdt

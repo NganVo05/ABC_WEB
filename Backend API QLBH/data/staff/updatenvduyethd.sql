@@ -1,0 +1,1 @@
+EXEC[dbo]. [NV_DuyetHopDong] @manv, @mahd, @masothue

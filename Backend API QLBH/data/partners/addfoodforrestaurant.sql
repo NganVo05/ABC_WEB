@@ -1,0 +1,1 @@
+EXEC [dbo].[addFoodForRestaurant] @masothue, @macuahang, @tenmon

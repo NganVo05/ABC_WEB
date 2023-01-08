@@ -1,0 +1,1 @@
+EXEC [dbo].[addRestaurantForPartner] @macuahang, @masothue, @stk, @nganhang, @tenquan, @giomocua, @giodongcua, @tinhtrang, @diachi

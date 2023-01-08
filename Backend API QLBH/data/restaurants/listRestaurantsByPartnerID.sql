@@ -1,0 +1,1 @@
+EXEC [dbo].[ListRestaurantsForPartner] @masothue

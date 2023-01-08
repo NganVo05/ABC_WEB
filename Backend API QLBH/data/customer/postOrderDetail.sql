@@ -1,0 +1,2 @@
+EXEC [dbo].[USP_AddOrderDetail] @MADONHANG, @TENMON, @DONGIA, @SOLUONG
+
