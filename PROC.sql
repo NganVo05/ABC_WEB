@@ -1221,6 +1221,7 @@ begin tran
 	
 	select  MADONHANG, DIACHI, PHIVANCHUYEN,(PHIVANCHUYEN+TONGGIA) as TONGGIA from DONDATHANG 
 	where TINHTRANG = N'Đang Vận Chuyển' and MATX = @matx
+	order by NGAYLAP desc
 commit tran
 go
 
@@ -1361,36 +1362,9 @@ begin tran
 commit tran
 go
 
---13.hiển thị tình trạng, phí, giá ở giao diện theo dõi đơn
-create 
---alter 
-proc sp1_updateTINHTRANG
-	@madh char(15)
-as
-begin tran
-	select TINHTRANG, PHIVANCHUYEN,  TONGGIA 
-	from DONDATHANG DH
-	where DH.MADONHANG = @madh
-commit tran
-go
 
 
---14.hiện mã đơn, địa chỉ, họ tên, sđt ở giao diện theo dõi đơn
-create
---alter 
-proc sp2_updateTINHTRANG
-	@madh char(15)
-as
-begin tran
-	select DH.MADONHANG, DH.DIACHI, HOTEN, SDT
-	from KHACHHANG KH JOIN
-	DONDATHANG DH ON DH.MAKH = KH.MAKH 
-	where DH.MADONHANG = @madh
-commit tran
-go
-
-
----15------update mật khẩu cho tài xế---------------
+---13------update mật khẩu cho tài xế---------------
 create 
 --alter
 proc updatePasswordDriver
@@ -1416,7 +1390,7 @@ Begin tran
 	select 'Changed password successfully' as 'RESULT'
 commit tran
 return 1
----16-------------XEM THÔNG TIN CHUNG TÀI XẾ------------------------------------
+---14-------------XEM THÔNG TIN CHUNG TÀI XẾ------------------------------------
 
 create
 --alter 
