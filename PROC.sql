@@ -1058,6 +1058,33 @@ COMMIT TRAN
 RETURN 1
 GO
 
+---9---update mật khẩu cho khách hàng---------------
+create 
+--alter
+proc USP_updatePasswordCustomer
+	@makh char(15),
+	@newpass char(20)
+AS
+Begin tran
+	if not exists(select MAKH from KHACHHANG where MAKH = @makh) 
+	begin
+		select 'CUSTOMER IS NOT EXISTS' AS 'ERROR'
+		rollback tran
+		return 0
+	end
+	if(len(@newpass) < 8 )
+	begin
+		select 'Length of password is too short' AS 'ERROR'
+		rollback tran
+		return 0
+	end
+	update KHACHHANG 
+	set MK = @newpass
+	where MAKH = @makh
+	select 'Changed password successfully' as 'RESULT'
+commit tran
+return 1
+
 -------3. TÀI XẾ------------
 --1.Danh sách tài xế
 create 
@@ -1224,7 +1251,10 @@ begin tran
 commit tran
 go
                                                                        
-select * from CHITIETDONHANG where TENMON = ' Bánh HSM                                                                       '
+select * from DONDATHANG where MADONHANG = 'DH1163731126'
+select * from CHITIETDONHANG where MADONHANG = 'DH1163731126'
+select * from DONHANG_CUAHANG where MADONHANG = 'DH1163731126'
+
 
 -----------10.IN RA DIACHI, TINHTRANG, PHIVANCHUYEN, TONGGIA TRONG GIAO DIỆN BÊN TÀI XẾ,
 create 

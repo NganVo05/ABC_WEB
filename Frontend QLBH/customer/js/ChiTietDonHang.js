@@ -215,7 +215,7 @@ function pay(){
         console.log(typeof JSON.stringify(response[0].ERROR) !== 'undefined');
         console.log(JSON.stringify(response[0].ERROR));
         console.log(JSON.stringify(response));  
-        if((typeof JSON.stringify(response[0].ERROR) !== 'undefined') === false){
+        if((typeof JSON.stringify(response[0].ERROR) == 'undefined')){
           const url2 = `http://localhost:8080/api/customer/addOrderStore`;
           // for(let i = 0; i < orderStore.length; i++){
           fetch(url2, {
@@ -243,10 +243,9 @@ function pay(){
             .then(OrdDe => OrdDe.json())
             .then(OrdDe => console.log(JSON.stringify(OrdDe)));
           }
+          location.href="TheoDoiDonHang.html";
         }
       });
-
-      location.href="TheoDoiDonHang.html";
     }
   }
   else{
