@@ -29,4 +29,4 @@ function returnDriver(){
 }
 
 //Display info of Customer
-returnDriver(jsoncustomer);
+returnDriver();
