@@ -75,25 +75,28 @@ function start() {
       Tcell5.innerText = data[i].NGAYLAP;
       Tcell6.appendChild(button);
       // console.log(Trow.cells[1]);
-      console.log(i+1 + ":", data[i].DANHGIA);
+      // console.log(i+1 + ":", data[i].DANHGIA);
       // console.log(data[3].DANHGIA);
-
       if(data[i].DANHGIA.localeCompare('0/5') != 0){
         button.setAttribute("disabled", "true");
         button.innerText = "Đã đánh giá";
       }
       else{
+        // button.setAttribute("disabled", "false");
         button.innerText = "Đánh giá";
-        button.onclick = () => {
-          var store = dataTable.rows[i+1].cells[1].innerHTML;
-          var sum = dataTable.rows[i+1].cells[2].innerHTML;
-          var state = dataTable.rows[i+1].cells[3].innerHTML;
-          var date = dataTable.rows[i+1].cells[4].innerHTML;
-          good.unshift([id, store, sum, state, date, `button${i+1}`]);
-          localStorage.setItem('good', JSON.stringify(good));
-          console.log(good);
-          location.href="DanhGia.html";
-        };
+        if(data[i].TINHTRANG.trim() == 'Đã Giao'){
+          button.onclick = () => {
+            var store = dataTable.rows[i+1].cells[1].innerHTML;
+            var sum = dataTable.rows[i+1].cells[2].innerHTML;
+            var state = dataTable.rows[i+1].cells[3].innerHTML;
+            var date = dataTable.rows[i+1].cells[4].innerHTML;
+            good.unshift([id, store, sum, state, date, `button${i+1}`]);
+            localStorage.setItem('good', JSON.stringify(good));
+            console.log(good);
+            location.href="DanhGia.html";
+          };
+        }
+        // console.log(i+1 , data[i].TINHTRANG.trim());
       }
     }
     status.appendChild(dataTable);
