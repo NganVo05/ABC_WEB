@@ -25,7 +25,7 @@ async function approval(manv,mahd,masothue){
         alert("ERROR: " + data[0].ERROR)
     }
     else{
-        alert("Duyệt Hợp Đồng Thành Công!")
+        alert(data[0].RESULT)
         location.reload()
     }
 }

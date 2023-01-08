@@ -131,7 +131,7 @@ Begin Tran
 	-- check valid data
 		IF(@slchinhanh <= 0 OR @sldonhangdukien <= 0 OR @thoigianhopdong < 6 OR @thoigianhopdong > 36)
 		Begin
-			Select 'Invalid datal' AS ERROR
+			Select 'NUMBER OF RESTAURANTS MUST BE GREARTER THAN 0 AND MINIMUM CONTRACT PERIOD IS 6 MONTHS ' AS ERROR
 			Rollback Tran
 			Return 0
 		End
@@ -485,6 +485,7 @@ COMMIT TRAN
 RETURN 1
 GO
 
+select *from DOITAC
 --10. Thêm cửa hàng
 CREATE
 --ALTER
@@ -500,6 +501,7 @@ PROC addRestaurantForPartner
 	@diachi NCHAR(50)
 AS
 BEGIN TRAN
+	
 	IF NOT EXISTS(SELECT MASOTHUE FROM DOITAC WHERE MASOTHUE = @masothue)
 	BEGIN
 		SELECT 'PARTNER IS NOT EXISTS' AS 'ERROR'
@@ -716,6 +718,9 @@ go
 --DROP PROC IF EXISTS USP_GetStoreByName
 --GO
 
+select *from CUAHANG  where TENQUAN = N'Ăn Vặt Bờ Kè'
+select *from HOPDONG where MASOTHUE = 'TAX20022002    ' 
+
 CREATE 
 --ALTER 
 PROC USP_GetStoreByName
@@ -902,7 +907,6 @@ BEGIN TRAN
 			ROLLBACK TRAN
 			RETURN 0
 		END
-
 	--DONDATHANG
 	INSERT INTO DONDATHANG (MADONHANG, MAKH, PHIVANCHUYEN, TINHTRANG, DIACHI, NGAYLAP, HINHTHUCTHANHTOAN, TONGGIA, DANHGIA) VALUES (@MADH, @MAKH, @SHIP, @STATE, @ADDRESS, GETDATE(), @METHOD, @SUM, @DANHGIA)
 
@@ -1052,11 +1056,20 @@ BEGIN TRAN
 	UPDATE DONDATHANG SET DANHGIA = @DANHGIA WHERE MADONHANG = @MADONHANG AND MAKH = @MAKH
 	DECLARE @MACH CHAR(15)
 	SELECT @MACH = MACUAHANG FROM DONHANG_CUAHANG WHERE MADONHANG = @MADONHANG
-	UPDATE CUAHANG SET DANHGIA = CAST((CAST(LEFT(@DANHGIA, 1) AS INT) * 100 + CAST(LEFT(DANHGIA, 1) AS INT) * 100) / 200 AS VARCHAR) + '/5' WHERE MACUAHANG = @MACH
+	UPDATE CUAHANG SET DANHGIA = CAST((CAST(ISNULL(LEFT(@DANHGIA, 1),5) AS INT) * 100 + CAST(ISNULL(LEFT(DANHGIA, 1),5) AS INT) * 100) / 200 AS VARCHAR) + '/5' WHERE MACUAHANG = @MACH
+	
 	SELECT 'UPDATE SUCCESSFULL' AS '1'
 COMMIT TRAN
 RETURN 1
 GO
+select *from CUAHANG where TENQUAN = N'Cửa Hàng 1'
+UPDATE CUAHANG
+SET TINHTRANG = N'HĐ'
+where MACUAHANG = 'CH735710473    '
+UPDATE CUAHANG SET DANHGIA = CAST((CAST(LEFT('4/5', 1) AS INT) * 100 + CAST(LEFT(DANHGIA, 1) AS INT) * 100) / 200 AS VARCHAR) + '/5' WHERE MACUAHANG = '251497612      '
+
+select CAST(ISNULL(LEFT(DANHGIA, 1),5) AS INT) from CUAHANG WHERE MACUAHANG = '251497612      '
+select *from DONDATHANG WHERE MADONHANG = 'DH221297634717'
 
 ---9---update mật khẩu cho khách hàng---------------
 create 
@@ -1514,10 +1527,14 @@ BEGIN tran
 	set MANV = @manv
 	where MAHOPDONG = @mahd and MASOTHUE = @masothue
 
-	select N'Duyệt Hợp Đồng Thành Công' as 'RESULT'
+	declare @pass char(20), @emailpartner char(30), @announce nchar(500)
+	select  @pass = MK, @emailpartner = EMAIL from DOITAC where MASOTHUE = @masothue
+	set @announce = N'Duyệt Hợp Đồng Thành Công!! Partner Email: ' + CAST(@emailpartner as nvarchar(30)) + ' USERNAME: '+ CAST(@masothue as nvarchar(15)) + ' PASSWORD: '+ CAST(@pass as nvarchar(20))
+	print  @announce
+	select @announce as 'RESULT'
 commit tran
 return 1
-
+select *from DOITAC
 --4. Liệt kê hợp đồng phụ trách
 CREATE 
 --ALTER
