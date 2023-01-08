@@ -1,10 +1,10 @@
-const jsoncustomer = JSON.parse(sessionStorage.getItem("jsoncustomer"))
+const jsoncustomer = JSON.parse(sessionStorage.getItem("jsoncustomer"));
 
 const toText= ['Mã Khách Hàng', 'Tên Khách Hàng', 'Số Điện Thoại', 'Số Đơn Hàng Chưa Giao'];
 
 if(jsoncustomer === null){
-    console.log("logout")
-    location.href = "/customer/login/index.html"
+    console.log("logout");
+    location.href = "/customer/login/index.html";
 }
 
 // hàm đăng xuất
